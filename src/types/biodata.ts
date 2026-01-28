@@ -176,6 +176,7 @@ export type BiodataAction =
 export interface BiodataContextType {
   biodata: Biodata;
   dispatch: React.Dispatch<BiodataAction>;
+  previewRef: React.RefObject<HTMLDivElement | null>;
   
   // Helper functions
   updateField: (sectionId: string, fieldId: string, value: string) => void;

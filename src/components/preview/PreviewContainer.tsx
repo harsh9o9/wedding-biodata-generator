@@ -24,10 +24,9 @@ const DEFAULT_ZOOM = 0.75;
  * Features real-time preview with debounced updates and template rendering
  */
 export function PreviewContainer({ className }: PreviewContainerProps) {
-  const { biodata } = useBiodata();
+  const { biodata, previewRef } = useBiodata();
   const [zoom, setZoom] = useState(DEFAULT_ZOOM);
   const [isDownloading, setIsDownloading] = useState(false);
-  const previewRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
   // Debounce biodata updates for preview (300ms)

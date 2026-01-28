@@ -16,7 +16,7 @@ interface DownloadActionsProps {
  * Handles PDF download with loading state and progress feedback
  */
 export function DownloadActions({ className }: DownloadActionsProps) {
-  const { biodata } = useBiodata();
+  const { biodata, previewRef } = useBiodata();
   const [isGenerating, setIsGenerating] = useState(false);
   const [downloadStatus, setDownloadStatus] = useState<"idle" | "generating" | "success" | "error">("idle");
 
@@ -45,11 +45,24 @@ export function DownloadActions({ className }: DownloadActionsProps) {
   const handleDownloadPDF = useCallback(async () => {
     if (isGenerating) return;
 
+    if (!previewRef.current) {
+      toast({
+        title: "Preview Not Found",
+        description: "Unable to locate the preview element. Please make sure the preview is visible.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsGenerating(true);
     setDownloadStatus("generating");
 
     try {
-      await downloadPDF(biodata);
+      await downloadPDF(biodata, {
+        element: previewRef.current,
+        scale: 2,
+        includeBackground: true,
+      });
       
       setDownloadStatus("success");
       toast({
@@ -79,7 +92,7 @@ export function DownloadActions({ className }: DownloadActionsProps) {
     } finally {
       setIsGenerating(false);
     }
-  }, [biodata, isGenerating, generateFilename]);
+  }, [biodata, previewRef, isGenerating, generateFilename, toast]);
 
   /**
    * Get button icon based on status

@@ -8,6 +8,7 @@ import React, {
   useEffect,
   useState,
   useMemo,
+  useRef,
 } from "react";
 import {
   Biodata,
@@ -291,6 +292,7 @@ interface BiodataProviderProps {
  * Wraps the application with biodata context and handles auto-save
  */
 export function BiodataProvider({ children }: BiodataProviderProps) {
+  const previewRef = useRef<HTMLDivElement>(null);
   const [biodata, dispatch] = useReducer(biodataReducer, null, () => {
     // Initialize from localStorage if available (SSR-safe)
     if (isClient()) {
@@ -419,6 +421,7 @@ export function BiodataProvider({ children }: BiodataProviderProps) {
     () => ({
       biodata,
       dispatch,
+      previewRef,
       updateField,
       addField,
       removeField,
