@@ -1,7 +1,8 @@
 {
-  "name": "biodata",
+  "name": "wedding-biodata-generator",
   "version": "0.1.0",
   "private": true,
+  "description": "Indian Wedding Biodata Generator - Create beautiful, customizable wedding biodatas",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,9 +10,24 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "next": "16.1.4",
+    "@radix-ui/react-accordion": "^1.2.0",
+    "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-dropdown-menu": "^2.1.1",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-select": "^2.1.1",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-tabs": "^1.1.0",
+    "@radix-ui/react-toast": "^1.2.1",
+    "@radix-ui/react-tooltip": "^1.1.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.0.0",
+    "lucide-react": "^0.436.0",
+    "next": "^16.1.6",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -22,5 +38,8 @@
     "eslint-config-next": "16.1.4",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "volta": {
+    "node": "24.6.0"
   }
 }

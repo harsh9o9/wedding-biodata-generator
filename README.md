@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Indian Wedding Biodata Generator
 
-## Getting Started
+Create beautiful, customizable Indian wedding biodatas online. Choose from traditional and modern templates, add your personal details, and download as a professional PDF.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-16-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4-38B2AC)
+![License](https://img.shields.io/badge/License-MIT-green)
 
+## ✨ Features
+
+- 📝 **Easy Form Input** - Intuitive form with all standard biodata fields
+- 🎨 **Multiple Templates** - Classic, Modern, Elegant, and Royal designs
+- 🖼️ **Custom Backgrounds** - Choose from provided backgrounds or upload your own
+- 📷 **Photo Support** - Upload and position your photo with various frame styles
+- 🌐 **Bilingual Support** - English and Hindi labels for all fields
+- ✏️ **Fully Customizable** - Add, remove, or reorder sections and fields
+- 📥 **PDF Export** - Download professional A4-sized PDFs
+- 💾 **Auto-Save** - Your progress is automatically saved to browser storage
+- 📤 **Import/Export** - Save and load biodata as JSON files
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 20.9.0 or higher
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/biodata-generator.git
+cd biodata-generator
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Run the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Learn More
+## 📁 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/                    # Next.js App Router pages
+│   ├── page.tsx           # Landing page
+│   ├── editor/            # Editor page
+│   ├── layout.tsx         # Root layout
+│   └── globals.css        # Global styles & Tailwind config
+├── components/
+│   ├── ui/                # Base UI components (Button, Input, etc.)
+│   ├── landing/           # Landing page components
+│   ├── editor/            # Editor layout components
+│   ├── form/              # Form input components
+│   ├── preview/           # Preview container
+│   └── templates/         # Template renderers
+├── context/
+│   └── BiodataContext.tsx # State management
+├── hooks/                 # Custom React hooks
+├── lib/
+│   ├── utils.ts          # Utility functions
+│   ├── validators.ts     # Form validation
+│   └── pdf-generator.ts  # PDF generation
+├── types/
+│   └── biodata.ts        # TypeScript types
+└── constants/
+    ├── fields.ts         # Default biodata fields
+    ├── templates.ts      # Template configurations
+    └── theme.ts          # Color & style constants
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Customization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Templates
 
-## Deploy on Vercel
+Four built-in templates are available:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Classic Traditional** - Timeless design with traditional borders
+- **Modern Minimal** - Clean, contemporary look
+- **Elegant Gold** - Luxurious design with gold accents
+- **Royal Heritage** - Rich, regal Indian aesthetics
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Color Theme
+
+The app uses an Indian wedding-inspired color palette:
+
+- **Saffron** `#FF6B35` - Primary accent
+- **Maroon** `#8B1538` - Traditional elegance
+- **Gold** `#D4A84B` - Luxury accents
+- **Cream** `#FFF9F0` - Warm backgrounds
+
+### Fonts
+
+- **Noto Sans** - Primary body font with Devanagari support
+- **Noto Serif** - Secondary body font
+- **Playfair Display** - Elegant heading font
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 16](https://nextjs.org/) with App Router
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **UI Components**: [Radix UI](https://www.radix-ui.com/)
+- **PDF Generation**: [@react-pdf/renderer](https://react-pdf.org/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+
+## 📜 Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Sample background images included for demonstration
+- Inspired by traditional Indian wedding biodata formats
+- Built with love for the Indian diaspora worldwide
+
+---
+
+Made with ❤️ for Indian weddings

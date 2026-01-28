@@ -1,26 +1,290 @@
 @import "tailwindcss";
 
+/* ============================================
+   DESIGN SYSTEM - Single Source of Truth
+   ============================================
+   
+   This file defines ALL visual design tokens.
+   
+   RULES:
+   1. NEVER use arbitrary values like `p-[17px]` - use the scale
+   2. NEVER hardcode colors - use semantic tokens: `bg-primary`, `text-muted-foreground`
+   3. Use Tailwind's default scales for spacing, font-size, radius
+   
+   SPACING SCALE (use p-*, m-*, gap-*, etc.):
+   ┌────────┬────────┬────────────────────────────┐
+   │ Class  │ Value  │ Use Case                   │
+   ├────────┼────────┼────────────────────────────┤
+   │ 1      │ 4px    │ Tight spacing, icons       │
+   │ 2      │ 8px    │ Related elements           │
+   │ 3      │ 12px   │ Small gaps                 │
+   │ 4      │ 16px   │ Default padding/margin     │
+   │ 6      │ 24px   │ Section padding            │
+   │ 8      │ 32px   │ Large gaps                 │
+   │ 12     │ 48px   │ Section margins            │
+   │ 16     │ 64px   │ Page sections              │
+   └────────┴────────┴────────────────────────────┘
+   
+   FONT SIZE SCALE (use text-*):
+   ┌──────────┬────────┬────────────────────────────┐
+   │ Class    │ Size   │ Use Case                   │
+   ├──────────┼────────┼────────────────────────────┤
+   │ text-xs  │ 12px   │ Captions, labels           │
+   │ text-sm  │ 14px   │ Secondary text             │
+   │ text-base│ 16px   │ Body text (default)        │
+   │ text-lg  │ 18px   │ Lead paragraphs            │
+   │ text-xl  │ 20px   │ Section headings           │
+   │ text-2xl │ 24px   │ Page headings              │
+   │ text-3xl │ 30px   │ Hero headings              │
+   └──────────┴────────┴────────────────────────────┘
+   
+   COLOR TOKENS:
+   - primary, primary-light, primary-dark (Saffron)
+   - secondary, secondary-light, secondary-dark (Maroon)
+   - accent, accent-light, accent-dark (Gold)
+   - background, foreground
+   - card, card-foreground
+   - muted, muted-foreground
+   - border, input, ring
+   - destructive, destructive-foreground
+   
+   ============================================ */
+
+/* ============================================
+   Color Palette - Semantic Tokens
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Layout */
+  --background: #FFF9F0;
+  --foreground: #2D1810;
+  
+  /* Primary - Saffron/Orange (CTAs, links, highlights) */
+  --primary: #FF6B35;
+  --primary-foreground: #FFFFFF;
+  --primary-light: #FF8A5B;
+  --primary-dark: #E55A2B;
+  
+  /* Secondary - Maroon (headers, emphasis) */
+  --secondary: #8B1538;
+  --secondary-foreground: #FFFFFF;
+  --secondary-light: #A52A4C;
+  --secondary-dark: #6B0F2A;
+  
+  /* Accent - Gold (decorative, borders, highlights) */
+  --accent: #D4A84B;
+  --accent-foreground: #2D1810;
+  --accent-light: #E5C268;
+  --accent-dark: #B8922F;
+  
+  /* Neutrals */
+  --cream: #FFF9F0;
+  --cream-dark: #F5EDE0;
+  --ivory: #FFFFF0;
+  
+  /* UI States */
+  --muted: #F5EDE0;
+  --muted-foreground: #6B5750;
+  
+  /* Form Elements */
+  --border: #E5D5C5;
+  --input: #FFFFFF;
+  --ring: #D4A84B;
+  
+  /* Cards */
+  --card: #FFFFFF;
+  --card-foreground: #2D1810;
+  
+  /* Feedback */
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+  
+  /* Radius base */
+  --radius: 0.5rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* Dark Mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #1A1410;
+    --foreground: #F5EDE0;
+    
+    --primary: #FF8A5B;
+    --primary-foreground: #1A1410;
+    
+    --secondary: #C94D6D;
+    --secondary-foreground: #1A1410;
+    
+    --accent: #E5C268;
+    --accent-foreground: #1A1410;
+    
+    --cream: #2D1810;
+    --cream-dark: #3D2820;
+    
+    --muted: #3D2820;
+    --muted-foreground: #A99890;
+    
+    --border: #5D4D40;
+    --input: #2D1810;
+    --ring: #E5C268;
+    
+    --card: #2D1810;
+    --card-foreground: #F5EDE0;
   }
+}
+
+/* ============================================
+   Tailwind Theme Mapping
+   ============================================ */
+
+@theme inline {
+  /* Map CSS variables to Tailwind utilities */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-light: var(--primary-light);
+  --color-primary-dark: var(--primary-dark);
+  
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-light: var(--secondary-light);
+  --color-secondary-dark: var(--secondary-dark);
+  
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-light: var(--accent-light);
+  --color-accent-dark: var(--accent-dark);
+  
+  --color-cream: var(--cream);
+  --color-cream-dark: var(--cream-dark);
+  --color-ivory: var(--ivory);
+  
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  
+  /* Indian theme colors (for templates) */
+  --color-saffron: #FF6B35;
+  --color-maroon: #8B1538;
+  --color-gold: #D4A84B;
+  --color-deep-red: #A52A4C;
+  --color-turmeric: #E5A835;
+  --color-henna: #8B4513;
+  --color-peacock: #006B5A;
+  --color-royal-blue: #1E3A8A;
+  
+  /* Typography */
+  --font-sans: "Noto Sans", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-serif: "Noto Serif", "Noto Serif Devanagari", Georgia, serif;
+  --font-display: "Playfair Display", "Noto Serif", Georgia, serif;
+  
+  /* Custom sizes for A4 preview */
+  --width-a4: 210mm;
+  --height-a4: 297mm;
+}
+
+/* ============================================
+   Base Resets
+   ============================================ */
+
+* {
+  border-color: var(--border);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Scrollbar (browser-specific, can't use utilities)
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cream-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-dark);
+}
+
+/* ============================================
+   Print Styles (for PDF)
+   ============================================ */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+/* ============================================
+   Keyframe Animations
+   Usage: animate-[fade-in_0.3s_ease-out]
+   ============================================ */
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(8px); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
+/* Animation utilities for Tailwind */
+@theme inline {
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
 }
