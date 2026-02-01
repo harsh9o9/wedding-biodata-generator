@@ -23,6 +23,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   Button,
+  Kbd,
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -180,11 +181,16 @@ export function FormSection({
                         "cursor-grab rounded p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground active:cursor-grabbing",
                         isDragging && "cursor-grabbing"
                       )}
+                      aria-label="Drag to reorder section. Press Space to grab, use arrow keys to move, Space to drop."
                     >
                       <GripVertical className="h-4 w-4 text-muted-foreground" />
                     </button>
                   </TooltipTrigger>
-                  <TooltipContent>Drag to reorder</TooltipContent>
+                  <TooltipContent side="left" className="text-xs px-2 py-1.5">
+                    <div className="space-y-0.5">
+                      <div>Drag or <Kbd className="text-[10px] px-1 py-0">Space</Kbd> + <Kbd className="text-[10px] px-1 py-0">↑↓</Kbd></div>
+                    </div>
+                  </TooltipContent>
                 </Tooltip>
               )}
 

@@ -1,11 +1,28 @@
 "use client";
 
 import React, { useState, useCallback, useMemo } from "react";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import { Button, Card, CardContent } from "@/components/ui";
 import { Plus, RotateCcw, Save, CheckCircle, AlertCircle } from "lucide-react";
 import { useBiodata } from "@/context/BiodataContext";
 import { useBiodataForm } from "@/hooks";
 import { FormSection } from "./FormSection";
+import { DraggableSectionWrapper } from "./DraggableSectionWrapper";
 import { AddFieldModal } from "./AddFieldModal";
 import { AddSectionModal } from "./AddSectionModal";
 import { BiodataField, BiodataSection } from "@/types/biodata";
@@ -29,6 +46,7 @@ export function BiodataForm({
     addSection,
     removeSection,
     dispatch,
+    reorderSections,
   } = useBiodata();
 
   const {
@@ -49,6 +67,34 @@ export function BiodataForm({
   const sortedSections = useMemo(
     () => [...biodata.sections].sort((a, b) => a.order - b.order),
     [biodata.sections]
+  );
+
+  // Setup drag-and-drop sensors for mouse, touch, and keyboard
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(TouchSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  // Handle drag end event for sections
+  const handleSectionDragEnd = useCallback(
+    (event: DragEndEvent) => {
+      const { active, over } = event;
+
+      if (over && active.id !== over.id) {
+        const oldIndex = sortedSections.findIndex((s) => s.id === active.id);
+        const newIndex = sortedSections.findIndex((s) => s.id === over.id);
+
+        if (oldIndex !== -1 && newIndex !== -1) {
+          const reorderedSections = arrayMove(sortedSections, oldIndex, newIndex);
+          const sectionIds = reorderedSections.map((s) => s.id);
+          reorderSections(sectionIds);
+        }
+      }
+    },
+    [sortedSections, reorderSections]
   );
 
   // Handle adding field to a specific section
@@ -171,17 +217,37 @@ export function BiodataForm({
 
       {/* Form Sections */}
       <div className="flex-1 space-y-4 p-4">
-        {sortedSections.map((section, index) => (
-          <FormSection
-            key={section.id}
-            section={section}
-            onAddField={() => handleAddFieldToSection(section.id)}
-            onRemoveSection={() => handleRemoveSection(section.id)}
-            onToggleVisibility={() => handleToggleSectionVisibility(section.id)}
-            showHindiLabels={showHindiLabels}
-            defaultExpanded={index < 3} // First 3 sections expanded by default
-          />
-        ))}
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleSectionDragEnd}
+        >
+          <SortableContext
+            items={sortedSections.map((s) => s.id)}
+            strategy={verticalListSortingStrategy}
+          >
+            {sortedSections.map((section, index) => (
+              <DraggableSectionWrapper
+                key={section.id}
+                id={section.id}
+                disabled={!section.visible}
+              >
+                {({ dragHandleProps, isDragging }) => (
+                  <FormSection
+                    section={section}
+                    onAddField={() => handleAddFieldToSection(section.id)}
+                    onRemoveSection={() => handleRemoveSection(section.id)}
+                    onToggleVisibility={() => handleToggleSectionVisibility(section.id)}
+                    dragHandleProps={dragHandleProps}
+                    isDragging={isDragging}
+                    showHindiLabels={showHindiLabels}
+                    defaultExpanded={index < 3} // First 3 sections expanded by default
+                  />
+                )}
+              </DraggableSectionWrapper>
+            ))}
+          </SortableContext>
+        </DndContext>
 
         {/* Add Section Button */}
         <Card className="border-dashed">
