@@ -105,49 +105,6 @@ export function PreviewContainer({ className }: PreviewContainerProps) {
   const previewWidth = A4.widthPx * zoom;
   const previewHeight = A4.heightPx * zoom;
 
-  // Generate background style based on biodata settings
-  const backgroundStyle = useMemo(() => {
-    const bg = debouncedBiodata.background;
-    const baseStyle: React.CSSProperties = {
-      width: previewWidth,
-      height: previewHeight,
-    };
-
-    switch (bg.type) {
-      case "color":
-        return {
-          ...baseStyle,
-          backgroundColor: bg.value.startsWith("var(")
-            ? template.colors.background
-            : bg.value,
-        };
-      case "gradient":
-        return {
-          ...baseStyle,
-          background: bg.value,
-        };
-      case "image":
-        return {
-          ...baseStyle,
-          backgroundImage: `url(${bg.value})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        };
-      case "pattern":
-        return {
-          ...baseStyle,
-          backgroundImage: `url(${bg.value})`,
-          backgroundRepeat: "repeat",
-        };
-      default:
-        return {
-          ...baseStyle,
-          backgroundColor: template.colors.background,
-        };
-    }
-  }, [debouncedBiodata.background, template.colors.background, previewWidth, previewHeight]);
-
   // Add overlay if configured
   const overlayStyle = useMemo((): React.CSSProperties | null => {
     const overlay = debouncedBiodata.background.overlay;
@@ -228,10 +185,45 @@ export function PreviewContainer({ className }: PreviewContainerProps) {
           <div
             ref={previewRef}
             className="relative overflow-hidden shadow-2xl transition-all duration-200"
-            style={backgroundStyle}
+            style={{
+              width: previewWidth,
+              height: previewHeight,
+              backgroundColor: debouncedBiodata.background.type === 'color' 
+                ? (debouncedBiodata.background.value.startsWith("var(")
+                    ? template.colors.background
+                    : debouncedBiodata.background.value)
+                : template.colors.background,
+            }}
           >
+            {/* Background Image/Pattern Layer */}
+            {(debouncedBiodata.background.type === 'image' || debouncedBiodata.background.type === 'pattern') && (
+              <img
+                src={debouncedBiodata.background.value}
+                alt=""
+                className="absolute inset-0 h-full w-full"
+                style={{
+                  objectFit: debouncedBiodata.background.type === 'image' ? 'cover' : 'none',
+                  objectPosition: 'center',
+                  pointerEvents: 'none',
+                  zIndex: 0,
+                }}
+              />
+            )}
+            
+            {/* Gradient Background Layer */}
+            {debouncedBiodata.background.type === 'gradient' && (
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: debouncedBiodata.background.value,
+                  pointerEvents: 'none',
+                  zIndex: 0,
+                }}
+              />
+            )}
+
             {/* Background overlay */}
-            {overlayStyle && <div style={overlayStyle} />}
+            {overlayStyle && <div style={{ ...overlayStyle, zIndex: 1 }} />}
 
             {/* Template Content */}
             <TemplateComponent

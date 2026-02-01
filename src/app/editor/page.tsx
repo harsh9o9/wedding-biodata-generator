@@ -7,7 +7,7 @@ import { BiodataForm } from "@/components/form";
 import { PreviewContainer } from "@/components/preview";
 import { Tabs, TabsList, TabsTrigger, TabsContent, Button, Toaster } from "@/components/ui";
 import { TooltipProvider } from "@/components/ui/Tooltip";
-import { ChevronLeft, Settings2, Palette, FileText, Globe, Download } from "lucide-react";
+import { ChevronLeft, FileCheck, Palette, FileText, Globe, Download } from "lucide-react";
 import Link from "next/link";
 
 /**
@@ -100,9 +100,9 @@ function FormPanelContent({
           <Palette className="h-4 w-4" />
           <span className="hidden sm:inline">Design</span>
         </TabsTrigger>
-        <TabsTrigger value="settings" className="flex items-center gap-2">
-          <Settings2 className="h-4 w-4" />
-          <span className="hidden sm:inline">Settings</span>
+        <TabsTrigger value="finalize" className="flex items-center gap-2">
+          <FileCheck className="h-4 w-4" />
+          <span className="hidden sm:inline">Finalize</span>
         </TabsTrigger>
       </TabsList>
 
@@ -122,7 +122,7 @@ function FormPanelContent({
           </div>
         </TabsContent>
 
-        <TabsContent value="settings" className="m-0 p-4">
+        <TabsContent value="finalize" className="m-0 p-4">
           <SettingsPanel />
         </TabsContent>
       </div>

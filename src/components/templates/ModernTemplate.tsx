@@ -27,6 +27,7 @@ export function ModernTemplate({ biodata, template, scale = 1 }: TemplateProps) 
         fontFamily: template.fonts.body,
         color: template.colors.text,
         padding: spacing(32),
+        backgroundColor: 'transparent',
       }}
     >
       {/* Subtle top accent bar */}

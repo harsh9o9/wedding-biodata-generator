@@ -28,6 +28,7 @@ export function RoyalTemplate({ biodata, template, scale = 1 }: TemplateProps) {
         fontFamily: template.fonts.body,
         color: template.colors.text,
         padding: spacing(16),
+        backgroundColor: 'transparent',
       }}
     >
       {/* Royal Ornate Border - Multiple layers */}

@@ -28,6 +28,7 @@ export function ElegantTemplate({ biodata, template, scale = 1 }: TemplateProps)
         fontFamily: template.fonts.body,
         color: template.colors.text,
         padding: spacing(20),
+        backgroundColor: 'transparent',
       }}
     >
       {/* Elegant Gold Border Frame */}

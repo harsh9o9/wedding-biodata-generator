@@ -28,6 +28,7 @@ export function ClassicTemplate({ biodata, template, scale = 1 }: TemplateProps)
         fontFamily: template.fonts.body,
         color: template.colors.text,
         padding: spacing(24),
+        backgroundColor: 'transparent',
       }}
     >
       {/* Decorative Double Border */}
