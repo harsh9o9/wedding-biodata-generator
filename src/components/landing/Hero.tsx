@@ -10,7 +10,7 @@ export function Hero() {
       {/* Decorative background */}
       <div className="absolute inset-0 -z-10">
         {/* Gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-cream via-background to-cream-dark" />
+        <div className="absolute inset-0 bg-linear-to-br from-cream via-background to-cream-dark" />
         
         {/* Decorative patterns */}
         <div
@@ -37,7 +37,7 @@ export function Hero() {
           {/* Main heading */}
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
             Create Beautiful{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary via-primary to-accent">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-secondary via-primary to-accent">
               Wedding Biodatas
             </span>{" "}
             in Minutes

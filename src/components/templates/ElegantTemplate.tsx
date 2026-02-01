@@ -144,6 +144,7 @@ export function ElegantTemplate({ biodata, template, scale = 1 }: TemplateProps)
                 boxShadow: `0 0 0 2px ${template.colors.background}, 0 0 0 4px ${template.colors.accent}`,
               }}
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={biodata.photo.url}
                 alt={personName}

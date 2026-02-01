@@ -60,6 +60,7 @@ export function ModernTemplate({ biodata, template, scale = 1 }: TemplateProps) 
                 border: `${spacing(2)} solid ${template.colors.border}`,
               }}
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={biodata.photo.url}
                 alt={personName}

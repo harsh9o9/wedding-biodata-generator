@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useCallback, useRef } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { useBiodata } from "@/context/BiodataContext";
 import { TEMPLATES } from "@/constants/templates";
 import { A4, DELAYS } from "@/constants/theme";
@@ -99,7 +99,7 @@ export function PreviewContainer({ className }: PreviewContainerProps) {
     } finally {
       setIsDownloading(false);
     }
-  }, [biodata, toast]);
+  }, [biodata, previewRef, toast]);
 
   // Calculate preview dimensions
   const previewWidth = A4.widthPx * zoom;
@@ -196,7 +196,10 @@ export function PreviewContainer({ className }: PreviewContainerProps) {
             }}
           >
             {/* Background Image/Pattern Layer */}
+            {/* Note: Using <img> instead of Next.js <Image> for html2canvas compatibility.
+                The Image component's optimization interferes with PDF generation. */}
             {(debouncedBiodata.background.type === 'image' || debouncedBiodata.background.type === 'pattern') && (
+              // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={debouncedBiodata.background.value}
                 alt=""

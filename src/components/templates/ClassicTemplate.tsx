@@ -116,6 +116,7 @@ export function ClassicTemplate({ biodata, template, scale = 1 }: TemplateProps)
                 border: `${spacing(3)} solid ${template.colors.border}`,
               }}
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={biodata.photo.url}
                 alt={personName}

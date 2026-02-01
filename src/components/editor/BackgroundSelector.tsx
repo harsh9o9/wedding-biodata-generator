@@ -324,7 +324,7 @@ export function BackgroundSelector({ className, compact = false }: BackgroundSel
                 key={bg.id}
                 onClick={() => handleSelectBackground(bg)}
                 className={cn(
-                  "relative aspect-[3/4] overflow-hidden rounded-lg border-2 transition-all",
+                  "relative aspect-3/4 overflow-hidden rounded-lg border-2 transition-all",
                   isSelected(bg.value)
                     ? "border-primary ring-2 ring-primary/20"
                     : "border-border hover:border-primary/50"
@@ -359,7 +359,7 @@ export function BackgroundSelector({ className, compact = false }: BackgroundSel
                 <div
                   key={img.id}
                   className={cn(
-                    "group relative aspect-[3/4] overflow-hidden rounded-lg border-2 transition-all",
+                    "group relative aspect-3/4 overflow-hidden rounded-lg border-2 transition-all",
                     isSelected(img.url)
                       ? "border-primary ring-2 ring-primary/20"
                       : "border-border hover:border-primary/50"

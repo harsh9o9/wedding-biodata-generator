@@ -69,7 +69,7 @@ export function ReligiousInvocationSelector() {
           </SelectContent>
         </Select>
         <p className="text-xs text-muted-foreground">
-          Choose a religious invocation to appear at the top of your biodata, or select "None" to
+          Choose a religious invocation to appear at the top of your biodata, or select &ldquo;None&rdquo; to
           leave it blank.
         </p>
       </div>

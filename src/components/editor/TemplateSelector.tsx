@@ -67,7 +67,7 @@ export function TemplateSelector({ className, compact = false }: TemplateSelecto
               key={template.id}
               onClick={() => handleSelectTemplate(template.id)}
               className={cn(
-                "group relative aspect-[3/4] overflow-hidden rounded-md border-2 transition-all",
+                "group relative aspect-3/4 overflow-hidden rounded-md border-2 transition-all",
                 biodata.templateId === template.id
                   ? "border-primary ring-2 ring-primary/20"
                   : "border-border hover:border-primary/50"
@@ -143,7 +143,7 @@ export function TemplateSelector({ className, compact = false }: TemplateSelecto
             >
               {/* Template Preview */}
               <div
-                className="aspect-[3/4] p-3"
+                className="aspect-3/4 p-3"
                 style={{ backgroundColor: template.colors.background }}
               >
                 {/* Header */}
@@ -217,7 +217,7 @@ export function TemplateSelector({ className, compact = false }: TemplateSelecto
             <div className="space-y-4">
               {/* Large Preview */}
               <div
-                className="aspect-[3/4] max-h-[60vh] overflow-hidden rounded-lg p-6"
+                className="aspect-3/4 max-h-[60vh] overflow-hidden rounded-lg p-6"
                 style={{ backgroundColor: previewTemplateData.colors.background }}
               >
                 {/* Header */}

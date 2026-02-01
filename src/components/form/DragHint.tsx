@@ -44,7 +44,7 @@ export function DragHint() {
       )}
     >
       <div className="flex items-start gap-3">
-        <div className="flex-shrink-0 mt-0.5">
+        <div className="shrink-0 mt-0.5">
           <Info className="h-5 w-5 text-primary" />
         </div>
         <div className="flex-1 space-y-2">
@@ -59,7 +59,7 @@ export function DragHint() {
         <Button
           variant="ghost"
           size="icon"
-          className="h-6 w-6 flex-shrink-0"
+          className="h-6 w-6 shrink-0"
           onClick={handleDismiss}
           aria-label="Dismiss hint"
         >

@@ -92,7 +92,7 @@ export function DownloadActions({ className }: DownloadActionsProps) {
     } finally {
       setIsGenerating(false);
     }
-  }, [biodata, previewRef, isGenerating, generateFilename, toast]);
+  }, [biodata, previewRef, isGenerating, generateFilename]);
 
   /**
    * Get button icon based on status

@@ -164,6 +164,7 @@ export function RoyalTemplate({ biodata, template, scale = 1 }: TemplateProps) {
                   border: `3px solid ${template.colors.accent}`,
                 }}
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={biodata.photo.url}
                   alt={personName}
