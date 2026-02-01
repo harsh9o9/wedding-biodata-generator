@@ -26,8 +26,8 @@ We are committed to providing a welcoming and inspiring community for all. Pleas
 
 ### Prerequisites
 
-- Node.js 20.9.0 or higher
-- npm or yarn
+- Node.js 24.6.0 or higher
+- npm
 - Git
 - A code editor (VS Code recommended)
 
@@ -40,8 +40,8 @@ We are committed to providing a welcoming and inspiring community for all. Pleas
 2. **Clone your fork**
    
    ```bash
-   git clone https://github.com/YOUR_USERNAME/biodata-generator.git
-   cd biodata-generator
+   git clone https://github.com/YOUR_USERNAME/wedding-biodata-generator.git
+   cd wedding-biodata-generator
    ```
 
 3. **Install dependencies**

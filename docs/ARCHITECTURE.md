@@ -29,11 +29,12 @@ The Indian Wedding Biodata Generator is a Next.js application that allows users 
 
 | Technology | Purpose | Version |
 |------------|---------|---------|
-| Next.js | React Framework | 16.x |
+| Next.js | React Framework | 16.1.6 |
 | TypeScript | Type Safety | 5.x |
 | Tailwind CSS | Styling | 4.x |
 | Radix UI | Accessible Components | Latest |
-| @react-pdf/renderer | PDF Generation | 3.x |
+| jsPDF | PDF Generation | 4.x |
+| html2canvas | Canvas Rendering | 1.4.x |
 | Lucide React | Icons | Latest |
 
 ## Application Structure
@@ -219,14 +220,20 @@ Biodata State
      │
      ▼
 ┌────────────────┐
-│ PDF Template   │  (React-PDF components)
-│ Selection      │
+│ Preview HTML   │  (React components)
+│ Element        │
 └────────────────┘
      │
      ▼
 ┌────────────────┐
-│ @react-pdf/    │  (Render to PDF)
-│ renderer       │
+│ html2canvas    │  (Capture as canvas)
+│                │
+└────────────────┘
+     │
+     ▼
+┌────────────────┐
+│ jsPDF          │  (Generate PDF)
+│                │
 └────────────────┘
      │
      ▼
@@ -235,19 +242,25 @@ Biodata State
 └────────────────┘
 ```
 
-### PDF Templates
+### PDF Generation Process
 
-Each template is implemented twice:
-1. **Preview Component**: HTML/CSS for live preview
-2. **PDF Component**: @react-pdf/renderer for export
+The application uses html2canvas + jsPDF for PDF generation:
+1. **Capture**: html2canvas captures the preview element as a high-resolution canvas
+2. **Convert**: Canvas is converted to JPEG with quality optimization (0.92)
+3. **Generate**: jsPDF creates A4 PDF and adds the image
+4. **Download**: PDF blob is generated and downloaded
 
-Templates share the same data structure but render differently for each output.
+This approach:
+- Captures exactly what user sees in preview
+- Produces smaller file sizes (200-500KB vs 7-8MB)
+- Avoids font registration complexity
+- Ensures WYSIWYG (What You See Is What You Get)
 
 ### Font Handling
 
-- Fonts registered with @react-pdf/renderer
-- Google Fonts loaded via CDN
-- Fallback to system fonts if loading fails
+- Google Fonts loaded via CDN in preview
+- Fonts are automatically captured by html2canvas
+- No separate font registration required
 
 ## Performance Considerations
 
