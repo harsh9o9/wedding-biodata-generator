@@ -2,6 +2,22 @@
 
 import React, { useState, useCallback } from "react";
 import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -19,6 +35,7 @@ import { useSectionForm } from "@/hooks";
 import { useBiodata } from "@/context/BiodataContext";
 import { DynamicField } from "./DynamicField";
 import { FieldActions } from "./FieldActions";
+import { DraggableFieldWrapper } from "./DraggableFieldWrapper";
 import { cn } from "@/lib/utils";
 
 interface FormSectionProps {
@@ -71,6 +88,40 @@ export function FormSection({
 
   const [expandedValue, setExpandedValue] = useState<string | undefined>(
     defaultExpanded ? section.id : undefined
+  );
+
+  // Setup drag-and-drop sensors for mouse, touch, and keyboard
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(TouchSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  // Handle drag end event
+  const handleDragEnd = useCallback(
+    (event: DragEndEvent) => {
+      const { active, over } = event;
+
+      if (over && active.id !== over.id) {
+        const sortedFields = [...section.fields].sort((a, b) => a.order - b.order);
+        const oldIndex = sortedFields.findIndex((f) => f.id === active.id);
+        const newIndex = sortedFields.findIndex((f) => f.id === over.id);
+
+        if (oldIndex !== -1 && newIndex !== -1) {
+          const reorderedFields = arrayMove(sortedFields, oldIndex, newIndex);
+          const fieldIds = reorderedFields.map((f) => f.id);
+          
+          dispatch({
+            type: "REORDER_FIELDS",
+            sectionId: section.id,
+            fieldIds,
+          });
+        }
+      }
+    },
+    [section.fields, section.id, dispatch]
   );
 
   // Get the icon component
@@ -130,7 +181,7 @@ export function FormSection({
                         isDragging && "cursor-grabbing"
                       )}
                     >
-                      <GripVertical className="h-4 w-4" />
+                      <GripVertical className="h-4 w-4 text-muted-foreground" />
                     </button>
                   </TooltipTrigger>
                   <TooltipContent>Drag to reorder</TooltipContent>
@@ -171,7 +222,7 @@ export function FormSection({
                         className="text-muted-foreground hover:text-foreground"
                       >
                         {section.visible ? (
-                          <Eye className="h-4 w-4" />
+                          <Eye className="h-4 w-4 text-foreground" />
                         ) : (
                           <EyeOff className="h-4 w-4 opacity-50" />
                         )}
@@ -197,7 +248,7 @@ export function FormSection({
                         }}
                         className="text-muted-foreground hover:text-primary"
                       >
-                        <Plus className="h-4 w-4" />
+                        <Plus className="h-4 w-4 text-muted-foreground" />
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>Add field to section</TooltipContent>
@@ -218,7 +269,7 @@ export function FormSection({
                         }}
                         className="text-muted-foreground hover:text-destructive"
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-4 w-4 text-muted-foreground" />
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>Remove section</TooltipContent>
@@ -230,45 +281,61 @@ export function FormSection({
             {/* Section Content - Fields */}
             <AccordionContent>
               <div className="space-y-4 px-4 pb-4">
-                {section.fields
-                  .sort((a, b) => a.order - b.order)
-                  .map((field) => (
-                    <div
-                      key={field.id}
-                      className={cn(
-                        "group relative rounded-md border border-transparent p-3 transition-colors hover:border-border hover:bg-muted/30",
-                        !field.visible && "opacity-50"
-                      )}
-                    >
-                      <div className="flex items-start gap-3">
-                        {/* Field Input */}
-                        <div className="flex-1">
-                          <DynamicField
-                            field={field}
-                            value={field.value}
-                            error={getFieldError(field.id)}
-                            onChange={(value) =>
-                              handleFieldChange(field.id, value)
-                            }
-                            onBlur={() => handleFieldBlur(field.id)}
-                            showHindiLabel={showHindiLabels}
-                          />
-                        </div>
+                <DndContext
+                  sensors={sensors}
+                  collisionDetection={closestCenter}
+                  onDragEnd={handleDragEnd}
+                >
+                  <SortableContext
+                    items={section.fields.map((f) => f.id)}
+                    strategy={verticalListSortingStrategy}
+                  >
+                    {section.fields
+                      .sort((a, b) => a.order - b.order)
+                      .map((field) => (
+                        <DraggableFieldWrapper
+                          key={field.id}
+                          id={field.id}
+                          disabled={!field.visible}
+                        >
+                          <div
+                            className={cn(
+                              "group relative rounded-md border border-transparent p-3 transition-colors hover:border-border hover:bg-muted/30",
+                              !field.visible && "opacity-50"
+                            )}
+                          >
+                            <div className="flex items-start gap-3">
+                              {/* Field Input */}
+                              <div className="flex-1">
+                                <DynamicField
+                                  field={field}
+                                  value={field.value}
+                                  error={getFieldError(field.id)}
+                                  onChange={(value) =>
+                                    handleFieldChange(field.id, value)
+                                  }
+                                  onBlur={() => handleFieldBlur(field.id)}
+                                  showHindiLabel={showHindiLabels}
+                                />
+                              </div>
 
-                        {/* Field Actions - Show on hover */}
-                        <div className="mt-6 opacity-0 transition-opacity group-hover:opacity-100">
-                          <FieldActions
-                            field={field}
-                            onToggleVisibility={() =>
-                              handleToggleFieldVisibility(field.id)
-                            }
-                            onRemove={() => handleFieldRemove(field.id)}
-                            compact
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                              {/* Field Actions - Show on hover */}
+                              <div className="mt-6 opacity-0 transition-opacity group-hover:opacity-100">
+                                <FieldActions
+                                  field={field}
+                                  onToggleVisibility={() =>
+                                    handleToggleFieldVisibility(field.id)
+                                  }
+                                  onRemove={() => handleFieldRemove(field.id)}
+                                  compact
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </DraggableFieldWrapper>
+                      ))}
+                  </SortableContext>
+                </DndContext>
 
                 {/* Empty State */}
                 {section.fields.length === 0 && (

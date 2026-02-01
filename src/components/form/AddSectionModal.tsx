@@ -145,7 +145,7 @@ export function AddSectionModal({
               <SelectTrigger label="Section Icon">
                 <SelectValue>
                   <div className="flex items-center gap-2">
-                    {SelectedIcon && <SelectedIcon className="h-4 w-4" />}
+                    {SelectedIcon && <SelectedIcon className="h-4 w-4 text-foreground" />}
                     <span>
                       {SECTION_ICON_OPTIONS.find((o) => o.value === formData.icon)
                         ?.label || formData.icon}
@@ -159,7 +159,7 @@ export function AddSectionModal({
                   return (
                     <SelectItem key={option.value} value={option.value}>
                       <div className="flex items-center gap-2">
-                        {IconComp && <IconComp className="h-4 w-4" />}
+                        {IconComp && <IconComp className="h-4 w-4 text-foreground" />}
                         <span>{option.label}</span>
                       </div>
                     </SelectItem>

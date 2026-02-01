@@ -183,6 +183,8 @@ function SettingsPanel() {
         </p>
         <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
           <li>• Click on section headers to expand/collapse</li>
+          <li>• Hover over fields to see reorder options</li>
+          <li>• Click the eye icon to show/hide fields</li>
           <li>• Changes are auto-saved to your browser</li>
           <li>• Use the Preview panel to see real-time updates</li>
         </ul>

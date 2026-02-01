@@ -233,6 +233,31 @@ body {
 }
 
 /* ============================================
+   Date/Time Picker Icons (browser-specific)
+   ============================================ */
+
+/* Style the calendar and clock icons in date/time inputs */
+::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(30%) sepia(20%) saturate(700%) hue-rotate(350deg) brightness(95%) contrast(90%);
+}
+
+::-webkit-calendar-picker-indicator:hover {
+  filter: invert(20%) sepia(30%) saturate(900%) hue-rotate(350deg) brightness(90%) contrast(95%);
+}
+
+/* Dark mode support for date/time picker icons */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-calendar-picker-indicator {
+    filter: invert(90%) sepia(10%) saturate(300%) hue-rotate(350deg) brightness(95%) contrast(90%);
+  }
+  
+  ::-webkit-calendar-picker-indicator:hover {
+    filter: invert(95%) sepia(5%) saturate(200%) hue-rotate(350deg) brightness(100%) contrast(95%);
+  }
+}
+
+/* ============================================
    Print Styles (for PDF)
    ============================================ */
 

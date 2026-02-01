@@ -48,7 +48,7 @@ export const DEFAULT_SECTIONS: BiodataSection[] = [
         type: "time",
         value: "",
         order: 2,
-        visible: true,
+        visible: false,
         editable: true,
       },
       {
@@ -59,7 +59,7 @@ export const DEFAULT_SECTIONS: BiodataSection[] = [
         value: "",
         placeholder: "City, State",
         order: 3,
-        visible: true,
+        visible: false,
         editable: true,
       },
       {
@@ -81,7 +81,7 @@ export const DEFAULT_SECTIONS: BiodataSection[] = [
         value: "",
         options: ["Fair", "Wheatish", "Dusky", "Dark"],
         order: 5,
-        visible: true,
+        visible: false,
         editable: true,
       },
       {
@@ -92,7 +92,7 @@ export const DEFAULT_SECTIONS: BiodataSection[] = [
         value: "",
         options: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
         order: 6,
-        visible: true,
+        visible: false,
         editable: true,
       },
       {
@@ -136,7 +136,7 @@ export const DEFAULT_SECTIONS: BiodataSection[] = [
         value: "",
         placeholder: "e.g., Gotra name",
         order: 10,
-        visible: true,
+        visible: false,
         editable: true,
       },
       {
@@ -169,7 +169,7 @@ export const DEFAULT_SECTIONS: BiodataSection[] = [
         value: "",
         placeholder: "Reading, travelling, cooking...",
         order: 13,
-        visible: true,
+        visible: false,
         editable: true,
       },
     ],
@@ -203,7 +203,7 @@ export const DEFAULT_SECTIONS: BiodataSection[] = [
         value: "",
         placeholder: "Name of institution",
         order: 1,
-        visible: true,
+        visible: false,
         editable: true,
       },
       {
@@ -214,7 +214,7 @@ export const DEFAULT_SECTIONS: BiodataSection[] = [
         value: "",
         placeholder: "Any certifications, courses...",
         order: 2,
-        visible: true,
+        visible: false,
         editable: true,
       },
       {
@@ -254,7 +254,7 @@ export const DEFAULT_SECTIONS: BiodataSection[] = [
         value: "",
         placeholder: "Name of employer",
         order: 5,
-        visible: true,
+        visible: false,
         editable: true,
       },
       {
@@ -310,7 +310,7 @@ export const DEFAULT_SECTIONS: BiodataSection[] = [
         value: "",
         placeholder: "e.g., Businessman, Retired",
         order: 1,
-        visible: true,
+        visible: false,
         editable: true,
       },
       {
@@ -332,7 +332,7 @@ export const DEFAULT_SECTIONS: BiodataSection[] = [
         value: "",
         placeholder: "e.g., Homemaker, Teacher",
         order: 3,
-        visible: true,
+        visible: false,
         editable: true,
       },
       {
@@ -398,7 +398,7 @@ export const DEFAULT_SECTIONS: BiodataSection[] = [
         value: "",
         placeholder: "Brief description of family background...",
         order: 9,
-        visible: true,
+        visible: false,
         editable: true,
       },
     ],
@@ -534,7 +534,7 @@ export const DEFAULT_SECTIONS: BiodataSection[] = [
         value: "",
         placeholder: "State",
         order: 2,
-        visible: true,
+        visible: false,
         editable: true,
       },
       {
@@ -545,7 +545,7 @@ export const DEFAULT_SECTIONS: BiodataSection[] = [
         value: "India",
         placeholder: "Country",
         order: 3,
-        visible: true,
+        visible: false,
         editable: true,
       },
       {

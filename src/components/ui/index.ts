@@ -1,6 +1,7 @@
 // UI Component exports
 export { Button, buttonVariants, type ButtonProps } from "./Button";
 export { Input, type InputProps } from "./Input";
+export { Kbd } from "./Kbd";
 export {
   Select,
   SelectGroup,

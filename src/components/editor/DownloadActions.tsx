@@ -106,7 +106,7 @@ export function DownloadActions({ className }: DownloadActionsProps) {
       case "error":
         return <AlertCircle className="h-4 w-4 text-red-500" />;
       default:
-        return <Download className="h-4 w-4" />;
+        return <Download className="h-4 w-4 text-inherit" />;
     }
   };
 

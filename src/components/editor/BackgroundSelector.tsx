@@ -403,7 +403,7 @@ export function BackgroundSelector({ className, compact = false }: BackgroundSel
           className="w-full"
           onClick={() => fileInputRef.current?.click()}
         >
-          <Upload className="mr-2 h-4 w-4" />
+          <Upload className="mr-2 h-4 w-4 text-foreground" />
           Upload Custom Background
         </Button>
 

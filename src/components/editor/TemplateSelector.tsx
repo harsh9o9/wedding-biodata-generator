@@ -198,7 +198,7 @@ export function TemplateSelector({ className, compact = false }: TemplateSelecto
                 onClick={(e) => handlePreview(template.id, e)}
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white opacity-0 transition-opacity group-hover:opacity-100"
               >
-                <Eye className="h-4 w-4" />
+                <Eye className="h-4 w-4 text-white" />
               </button>
             </div>
           ))}
@@ -300,7 +300,7 @@ export function TemplateSelector({ className, compact = false }: TemplateSelecto
                     setIsDialogOpen(false);
                   }}
                 >
-                  <Check className="mr-2 h-4 w-4" />
+                  <Check className="mr-2 h-4 w-4 text-inherit" />
                   Use This Template
                 </Button>
               </div>

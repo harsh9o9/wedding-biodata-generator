@@ -131,7 +131,7 @@ export function PreviewContainer({ className }: PreviewContainerProps) {
             disabled={zoom === ZOOM_LEVELS[0]}
             title="Zoom out"
           >
-            <ZoomOut className="h-4 w-4" />
+            <ZoomOut className="h-4 w-4 text-foreground" />
           </Button>
           <span className="min-w-16 text-center text-sm font-medium">
             {Math.round(zoom * 100)}%
@@ -143,7 +143,7 @@ export function PreviewContainer({ className }: PreviewContainerProps) {
             disabled={zoom === ZOOM_LEVELS[ZOOM_LEVELS.length - 1]}
             title="Zoom in"
           >
-            <ZoomIn className="h-4 w-4" />
+            <ZoomIn className="h-4 w-4 text-foreground" />
           </Button>
           <Button
             variant="ghost"
@@ -151,7 +151,7 @@ export function PreviewContainer({ className }: PreviewContainerProps) {
             onClick={handleResetZoom}
             title="Reset zoom"
           >
-            <RotateCcw className="h-4 w-4" />
+            <RotateCcw className="h-4 w-4 text-foreground" />
           </Button>
         </div>
 
@@ -168,7 +168,7 @@ export function PreviewContainer({ className }: PreviewContainerProps) {
             </>
           ) : (
             <>
-              <Download className="mr-2 h-4 w-4" />
+              <Download className="mr-2 h-4 w-4 text-primary-foreground" />
               Download PDF
             </>
           )}
