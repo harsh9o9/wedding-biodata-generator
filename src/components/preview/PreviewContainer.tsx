@@ -176,7 +176,7 @@ export function PreviewContainer({ className }: PreviewContainerProps) {
           >
             <ZoomOut className="h-4 w-4" />
           </Button>
-          <span className="min-w-[4rem] text-center text-sm font-medium">
+          <span className="min-w-16 text-center text-sm font-medium">
             {Math.round(zoom * 100)}%
           </span>
           <Button

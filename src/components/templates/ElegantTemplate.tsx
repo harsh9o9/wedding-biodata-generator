@@ -32,15 +32,17 @@ export function ElegantTemplate({ biodata, template, scale = 1 }: TemplateProps)
     >
       {/* Elegant Gold Border Frame */}
       <div
-        className="pointer-events-none absolute inset-3"
+        className="pointer-events-none absolute"
         style={{
+          inset: spacing(12),
           border: `3px double ${template.colors.primary}`,
           borderRadius: spacing(2),
         }}
       />
       <div
-        className="pointer-events-none absolute inset-5"
+        className="pointer-events-none absolute"
         style={{
+          inset: spacing(20),
           border: `1px solid ${template.colors.accent}`,
           borderRadius: spacing(2),
         }}

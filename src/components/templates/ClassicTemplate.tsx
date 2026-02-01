@@ -32,12 +32,19 @@ export function ClassicTemplate({ biodata, template, scale = 1 }: TemplateProps)
     >
       {/* Decorative Double Border */}
       <div
-        className="pointer-events-none absolute inset-4 rounded-sm border-2"
-        style={{ borderColor: template.colors.border }}
+        className="pointer-events-none absolute rounded-sm border-2"
+        style={{
+          inset: spacing(16),
+          borderColor: template.colors.border
+        }}
       />
       <div
-        className="pointer-events-none absolute inset-6 rounded-sm border"
-        style={{ borderColor: template.colors.border, opacity: 0.5 }}
+        className="pointer-events-none absolute rounded-sm border"
+        style={{
+          inset: spacing(24),
+          borderColor: template.colors.border,
+          opacity: 0.5
+        }}
       />
 
       {/* Corner Flourishes */}

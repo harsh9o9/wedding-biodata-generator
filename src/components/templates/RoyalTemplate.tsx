@@ -32,15 +32,17 @@ export function RoyalTemplate({ biodata, template, scale = 1 }: TemplateProps) {
     >
       {/* Royal Ornate Border - Multiple layers */}
       <div
-        className="pointer-events-none absolute inset-2"
+        className="pointer-events-none absolute"
         style={{
+          inset: spacing(8),
           border: `4px solid ${template.colors.primary}`,
           borderRadius: spacing(4),
         }}
       />
       <div
-        className="pointer-events-none absolute inset-4"
+        className="pointer-events-none absolute"
         style={{
+          inset: spacing(16),
           border: `2px solid ${template.colors.secondary}`,
           borderRadius: spacing(2),
         }}
